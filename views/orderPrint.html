@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发货单</title>
+    {{{include 'layout/header'}}}
+    <link href="{{{resourcesUrl}}}/css/plugins/steps/jquery.steps.css?{{{fileVersion}}}" rel="stylesheet">
+    <style type="text/css">
+        .textbox{width: 260px; display: inline-block;margin-bottom: 20px;}
+        .text-left{margin: 0 0 20px;}
+    </style>
+</head>
+<body class="gray-bg" id="app">
+<div class="wrapper wrapper-content" style="min-height: 975px;" v-for="item in items">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="float-e-margins">
+                <div class="ibox-content text-center p-md">
+                    <h2>美丽加美业商城发货单</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="float-e-margins">
+                <div class="ibox-content">
+                    <div>
+                        <span class="text-left textbox"> 收货人： <span v-text="item.main.shipping_name"></span></span>
+                        <span>订单号：</span>
+                        <span  v-text="item.main.order_number"></span>
+                    </div>
+                    <div>
+                        <span class="text-left textbox"> 收货人手机： <span v-text="item.main.shipping_phone"></span> </span>
+                        <span >下单时间：</span>
+                        <span v-text="item.main.in_date?new Date(item.main.in_date*1000).format('yyyy-MM-dd hh:mm:ss'):''">-</span>
+                    </div>
+                    <p class="text-left">收货地址： <span v-text="item.main.shipping_address"></span>   </p>
+                    <p class="text-left">买家留言： <span v-text="item.main.remark"></span>   </p>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>商品名称</th>
+                                <th>规格</th>
+                                <th>供应商商品编码</th>
+                                <th>重量</th>
+                                <th>价格</th>
+                                <th>数量</th>
+                                <th>小计</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="i in item.item">
+                                <td v-text="$index+1"></td>
+                                <td >
+                                    <span v-text="i.title"></span>
+                                </td>
+                                <td v-text="i.sku_name"> </td>
+                                <td v-text="i.supplier_sku_code"></td>
+                                <td v-text="i.weight"></td>
+                                <td v-text="i.price"></td>
+                                <td v-text="i.quantity"></td>
+                                <td v-text="i.quantity*i.price">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>商品总额（元）</td>
+                                <td v-text="item.order_total.sub_total.value"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>运费</td>
+                                <td v-text="item.order_total.shipping.value"></td>
+                            </tr>
+                            <tr v-show="item.order_total.coupon && item.order_total.coupon.value">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>优惠券折扣</td>
+                                <td v-text="item.order_total.coupon.value"></td>
+                            </tr>
+                            <tr v-show="item.order_total.pay_discount && item.order_total.pay_discount.value">
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>美丽宝支付优惠</td>
+                                <td v-text="item.order_total.pay_discount.value"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>订单总额（元）</td>
+                                <td v-text="item.order_total.total.value"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row" style="background: white;padding-bottom: 20px">
+        <div class="col-sm-4" style="width: 33.33333333%;float: left;">
+            <div class="ibox float-e-margins" style="border-right: 1px solid #ddd;">
+                <img src="{{{resourcesUrl}}}/img/mljiamall.png" style=" width: 92px;height: 92px;margin-left: 21px;">
+            </div>
+        </div>
+        <div class="col-sm-4" style="width: 33.33333333%;float: left;">
+            <div class="ibox float-e-margins" style="height: 92px; border-right: 1px solid #ddd;">
+                <p>供应商：<span v-text="supplier.name"></span></p>
+                <p>供应商客服：<span v-text="supplier.service_name"></span></p>
+                <p>客服电话：<span v-text="supplier.service_phone"></span></p>
+            </div>
+        </div>
+        <div class="col-sm-4" style="width: 33.33333333%;float: left;">
+            <div class="ibox float-e-margins">
+                <p>美丽加客服</p>
+                <p>4007-889-166转02（工作日9:00-18:00）</p>
+            </div>
+        </div>
+
+    </div>
+    <p style="margin-top: -22px;margin-left: 20px; width: 100%;float: left;">倘若包裹姗姗来迟，诚挚道上一句“抱歉，让您久等了”，您的满意是我们的动力，感谢一路有您!</p>
+</div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laypage/laypage.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/orderPrint.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

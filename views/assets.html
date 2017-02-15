@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>资产</title>
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">可用余额</span>
+                    <h5>资产</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins" id="balance">0</h1>
+                    <button  onclick="location.href='view?view=applyWithdraw'" class="btn btn-primary" type="button" id="applyWithdraw" style="display: none;float: right;margin-top: -33px;">申请提现</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+ </div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/assets.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

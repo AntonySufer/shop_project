@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页（财务)</title>
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>提现记录</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+
+                            <div class="ibox-content" style="border: none;">
+
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>供应商名称</th>
+                                        <th>创建时间</th>
+                                        <th>提现单号</th>
+                                        <th>状态</th>
+                                        <th>申请说明</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>张三</td>
+                                            <td>男</td>
+                                            <td>23</td>
+                                            <td>23</td>
+                                            <td>
+                                                <button   class="btn btn-primary" type="button" >同意</button>
+                                                <button   class="btn btn-primary" type="button" >拒绝</button>
+                                            </td>
+                                        </tr>
+                                        <tr class="no-records-found" style="display: none;"><td colspan="5">没有找到匹配的记录</td></tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+{{{include 'layout/footer'}}}
+</body>
+</html>

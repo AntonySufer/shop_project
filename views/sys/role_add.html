@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>编辑角色</title>
+	{{{include 'layout/header'}}}
+</head>
+<body>
+<div class="ibox float-e-margins" id="roleAdd" v-cloak>
+<div class="ibox-title">
+	<h5>编辑角色</h5>
+</div>
+<div class="ibox-content">
+	<div class="row" style="margin-left:35px;">
+		<div class="col-sm-6">
+			<form role="form"  class="form-horizontal">
+				<div class="form-group">
+					<label>角色名称</label>
+					<input type="text" id="role_names" maxlength="20" class="form-control" v-model="role.role_name" placeholder="请输入角色名称"/>
+				</div>
+				<div class="form-group">
+					<label>备注</label>
+					<input type="text" id="remarks" class="form-control" v-model="role.remark" placeholder="请输入备注"/>
+				</div>
+				<div class="form-group">
+					<label>授权</label>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<ul id="menuTree" class="ztree"></ul>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2 control-label"></div>
+					<input type="button" class="btn btn-warning" @click="back" value="返回" style="float: right;margin-right: 50px;"/>
+					&nbsp;&nbsp;<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定" style="float: right;margin-right: 20px;"/>
+				</div>
+			</form>
+		</div>
+
+	</div>
+</div>
+</div>
+
+
+{{{include 'layout/footer'}}}
+<script src="{{{resourcesUrl}}}/sys/javascripts/sys/role_add.js?{{{fileVersion}}}"></script>
+</body>
+</html>

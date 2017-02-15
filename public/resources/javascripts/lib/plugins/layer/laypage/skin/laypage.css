@@ -1,0 +1,87 @@
+/*!
+ laypage默认样式
+*/.laypage_main a,.laypage_main input,.laypage_main span{
+	font-size: 14px;
+    line-height: 36px;
+  	height: 36px;
+  	line-height: 36px;
+	}
+.laypage_main button,.laypage_main input,.laypageskin_default a{border:1px solid #ccc;background-color:#fff}
+.laypage_main{font-size:0;clear:both;color:#666}
+.laypage_main *{display:inline-block;vertical-align:top;font-size:12px}
+.laypage_main a{text-decoration:none;color:#666}
+.laypage_main a,.laypage_main span{margin:0 3px 6px;padding:0 10px}
+.laypage_main input{width:40px;margin:0 5px;padding:0 5px}
+.laypage_main button{height:28px;line-height:28px;margin-left:5px;padding:0 10px;color:#666}
+.laypageskin_default span{height:28px;line-height:28px;color:#999}
+.laypageskin_default .laypage_curr{
+	font-weight:700;
+	color:#666 ; 
+	background-color: #D32F90;
+  	color: #fff;
+  	border: none;
+  	line-height: 38px;
+  	height: 38px;
+  	}
+.wxqf_openseldx .laypage_main a{ 
+	line-height: 25px;
+  	height: 25px;   
+  	}
+.wxqf_openseldx .laypage_curr{ 
+	line-height: 27px;
+  	height: 27px;
+  	}
+  	
+.laypageskin_molv a,.laypageskin_molv span{padding:0 12px;border-radius:2px}
+.laypageskin_molv a{background-color:#f1eff0}
+.laypageskin_molv .laypage_curr{background-color:#00AA91;color:#fff}
+.laypageskin_molv input{height:24px;line-height:24px}
+.laypageskin_molv button{height:26px;line-height:26px}
+.laypageskin_yahei{color:#333}
+.laypageskin_yahei a,.laypageskin_yahei span{padding:0 13px;border-radius:2px;color:#333}
+.laypageskin_yahei .laypage_curr{background-color:#333;color:#fff}
+.laypageskin_flow{text-align:center}
+.laypageskin_flow .page_nomore{color:#999}
+
+.laypageskin_blue{color:#333}
+.laypageskin_blue a,.laypageskin_blue span{padding:0 13px;border-radius:2px;color:#333;}
+.laypageskin_blue a{ border:1px solid #e8e8e8;}
+.laypageskin_blue a:hover{padding:0 13px;border-radius:2px;color:#fff; border:1px solid #e8e8e8; background-color:#1fb9ff; }
+.laypageskin_blue .laypage_curr{background-color:#1fb9ff;color:#fff}
+
+
+/*分页修改*/
+
+.laypage_main{ text-align:right}
+
+.laypageskin_molv .laypage_curr{border: 1px solid #40BFF9;background-color: #1FB9FF; color:#fff;}
+.laypageskin_molv a{border: 1px solid #E8E8E8; background-color:#fff;}
+.laypageskin_molv a:hover{border: 1px solid #40BFF9;
+color: #40BFF9;}
+
+.laypageskin_molv input{height: 32px;
+line-height: 32px;}
+
+.laypage_main a, .laypage_main input, .laypage_main span {
+font-size: 14px;
+line-height: 32px;
+height: 32px;
+line-height: 32px;
+}
+
+.laypage_main input{width: 45px; -webkit-appearance:none;
+-moz-appearance:none;
+appearance:none; text-align:center; }
+
+.laypage_main input::-webkit-outer-spin-button,
+.laypage_main input::-webkit-inner-spin-button{
+    -webkit-appearance: none !important;
+    margin: 0; 
+}
+
+.laypage_main input[type="number"]{-moz-appearance:textfield;}
+
+.laypageskin_molv button{ width:62px; height:32px; outline:none;border: 1px solid #cacaca;}
+.laypageskin_molv button:hover{ background-color:#f6f6f6;}
+.laypageskin_molv button:active{ background-color:#ededed;}
+

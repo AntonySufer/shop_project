@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=11;IE=10;IE=EDGE" />
+    <title>美丽加 -供应商平台</title>
+    <meta name="description" content="">
+
+    <meta name="author" content="">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" href="{{{staticImage_Url}}}/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="{{{resourcesUrl}}}/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="{{{resourcesUrl}}}/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="{{{resourcesUrl}}}/css/animate.min.css" rel="stylesheet">
+    <link href="{{{resourcesUrl}}}/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <script type="text/javascript" >
+        var GLOBAL={
+            confRoot:"{{{confRoot}}}",
+            token:"{{{accessToken}}}",
+            refreshToken:"{{{refreshToken}}}",
+        };
+    </script>
+</head>
+
+<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<div id="wrapper">
+    <!--左侧导航开始-->
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="nav-close"><i class="fa fa-times-circle"></i>
+        </div>
+        <div class="sidebar-collapse">
+            <ul class="nav" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                        <!--<span><img alt="image"  height="26px" width="144px"  class="img-circle" /></span>-->
+
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear">
+                               <span class="block m-t-xs"><strong class="font-bold" v-text="username"></strong></span>
+                                <span class="text-muted text-xs block">管理员<b class="caret"></b></span>
+                                </span>
+                        </a>
+                        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                            <li @click="logout"><a >安全退出</a></li>
+                        </ul>
+                    </div>
+
+                </li>
+
+                <li v-for="item in menus">
+                    <a :href="item.menuUrl" :class="item.menuUrl?'J_menuItem':''" data-id="{{item.menuId}}">
+                        <i :class="item.icon"></i>
+                        <span class="nav-label" v-text="item.menuName"></span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level" v-show="item.menuList && item.menuList.length>0">
+                        <li v-for="menu in item.menuList">
+                            <a class="J_menuItem" :href="menu.menuUrl" v-text="menu.menuName"></a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <!--左侧导航结束-->
+    <!--右侧部分开始-->
+    <div id="page-wrapper" class="gray-bg dashbard-1">
+        <div class="row content-tabs">
+            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
+            </button>
+            <nav class="page-tabs J_menuTabs" v-show="indexView">
+                <div class="page-tabs-content">
+                    <a class="active J_menuTab" data-id="home">首页</a>
+                </div>
+            </nav>
+            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
+            </button>
+            <div class="btn-group roll-nav roll-right">
+                <button class="dropdown J_tabClose" data-toggle="dropdown">关闭操作<span class="caret"></span>
+
+                </button>
+                <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                    <li class="J_tabShowActive"><a>定位当前选项卡</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="J_tabCloseAll"><a>关闭全部选项卡</a>
+                    </li>
+                    <li class="J_tabCloseOther"><a>关闭其他选项卡</a>
+                    </li>
+                </ul>
+            </div>
+            <a id="logout" @click="logout"class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+        </div>
+        <div class="row J_mainContent" id="content-main">
+            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" :src="indexView" frameborder="0" data-id="home" seamless></iframe>
+        </div>
+        <div class="footer">
+            <div class="pull-right"> 深圳市美丽加互联网有限公司 版权所有 2013-2017</a>
+            </div>
+        </div>
+    </div>
+    <!--右侧部分结束-->
+    <!--右侧边栏开始-->
+    <div id="right-sidebar">
+        <div class="sidebar-container">
+
+        </div>
+    </div>
+    <!--右侧边栏结束-->
+
+</div>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/jquery.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/bootstrap.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/metisMenu/jquery.metisMenu.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/slimscroll/jquery.slimscroll.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/layer.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/vue.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/hplus.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script src="{{{resourcesUrl}}}/sys/libs/jquery.base64.js?{{{libVersion}}}"></script>
+
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/pace/pace.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/requestUrl.js?{{{fileVersion}}}" charset="utf-8"></script>
+<script src="{{{resourcesUrl}}}/sys/libs/jquery.base64.js?{{{libVersion}}}"></script>
+<script type="text/javascript" >
+
+    function getCookie(c_name){
+        if (document.cookie.length>0){
+            var c_start=document.cookie.indexOf(c_name + "=");
+            if (c_start!=-1){
+
+                c_start=c_start + c_name.length+1;
+                var c_end=document.cookie.indexOf(";",c_start);
+
+                if (c_end==-1) c_end=document.cookie.length;
+
+                return unescape(document.cookie.substring(c_start,c_end));
+            }
+        }
+        return "";
+    }
+    function setCookie(c_name,value,expiredays){
+        var exdate=new Date();
+        exdate.setDate(exdate.getDate()+expiredays);
+        document.cookie=c_name+ "=" +escape(value)+ ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())+";path=/";
+    }
+
+    var vm = new Vue({
+        el:'#wrapper',
+        data:{
+            menus:[],
+            indexView:'',
+            username:getCookie('userName'),
+        },
+        created:function(){
+            this.loadMenus();
+        },
+        methods: {
+            loadMenus:function(){
+                $.ajax({
+                    type: "GET",
+                    data:{token:getCookie('accessToken')},
+                    beforeSend:function(xhr) {
+                        xhr.setRequestHeader('Authorization',getCookie('accessToken'));
+                    },
+                    url: requestUrl.page.menu,
+                    dataType: "json",
+                    success: function(result){
+                        if(result.status==200){
+                            var data=$.parseJSON(($.base64.decode(result.content,"utf-8"))) || {};
+                            setCookie('perms',JSON.stringify(data.perms),1);
+                            vm.menus= data.menus;
+
+                            for(var i=0;i<data.menus.length;i++){
+                                if(data.menus[i].menuUrl=='view?view=home'){
+                                    vm.indexView='view?view=home';
+                                    break;
+                                }
+                            }
+                            loadScript('{{{resourcesUrl}}}/javascripts/lib/contabs.min.js?{{{libVersion}}}');
+                            loadScript('{{{resourcesUrl}}}/javascripts/lib/hplus.min.js?{{{libVersion}}}');
+                        }else{
+                            location.href='/login';
+                        }
+                    }
+                })
+            },
+            logout:function(){
+                $.ajax({
+                    type: "GET",
+                    data:{token:getCookie('accessToken')},
+                    url: requestUrl.page.logout,
+                    beforeSend:function(xhr) {
+                        xhr.setRequestHeader('Authorization',getCookie('accessToken'));
+                    },
+                    dataType: "json",
+                    success: function(result){
+                        setCookie('userId','',-1);
+                        setCookie('userName','',-1);
+                        setCookie('tenantId','',-1);
+                        setCookie('signToken','',-1);
+                        setCookie('accessToken','',-1);
+                        setCookie('perms','',-1);
+                        location.href='/login';
+                    }
+                })
+            }
+        }
+    });
+    $(function(){
+        $("body").bind("keydown", function(event) {
+            if (event.keyCode == 116) {
+                var dataId=$('a.active').attr('data-id');
+                var $iframe=$('.J_iframe[data-id="'+dataId+'"]');
+                var iframeSrc = $iframe.attr('src');
+                $iframe.attr('src',iframeSrc);
+                return false;
+            }
+        });
+        if(!getCookie('accessToken')){
+            location.href='/login';
+        }
+        //debounce函数
+        function debounce(func,wait,immediate){
+            var timeout;
+            return function(){
+                var context=this,args=arguments;
+                var later=function(){
+                    timeout=null;
+                    if(!immediate)func.apply(context,args);
+                };
+                var callNow=immediate&&!timeout;
+                clearTimeout(timeout);
+                timeout=setTimeout(later,wait);
+                if(callNow)func.apply(context,args);
+            };
+        };
+
+        var jwt_refresh_interval=jwt_refresh_interval || 10000;//执行函数间隔
+        var myEfficientFn=debounce(function(){
+            // 所有繁重的操作
+            //刷新token
+            $.ajax({
+                type: "GET",
+                url: requestUrl.page.refreshToken,
+                data: {refresh_token:getCookie('refreshToken')},
+                dataType: "json",
+                success: function(result){
+                    if(result.status==5){
+                        location.href='/login';
+                    }else if(result.status=200){
+                        var data=$.parseJSON(($.base64.decode(result.content,"utf-8")));
+                        setCookie('accessToken',data.refresh_token,1);
+                        jwt_refresh_interval= data.jwt_refresh_interval;
+                    }
+                },error:function(){
+                    location.href='/login';
+                }
+            })
+        },jwt_refresh_interval);
+        //
+        $(document).click(myEfficientFn);
+
+    })
+    function loadScript(url, callback){
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        if(script.readyState){ // IE
+            script.onreadystatechange = function(){
+                if(script.readyState == "loaded" || script.readyState == "complete"){
+                    script.onreadystatechange = null;
+                    callback && callback();
+                }
+            };
+        }else{ // FF, Chrome, Opera, ...
+            script.onload = function(){
+                callback && callback();
+            };
+        }
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+</script>

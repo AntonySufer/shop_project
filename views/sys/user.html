@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>管理员列表</title>
+	{{{include 'layout/header'}}}
+</head>
+<body>
+<div id="user">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>用户列表</h5>
+            </div>
+            <div class="ibox-content">
+                <a class=" btn btn-primary" v-show="isShowSave"  onclick="location.href='view?route=sys&view=user_add'">新增</a>
+                <button type="button"  v-show="isShowUp"  class="btn btn-primary" @click="update(checkedNames)">修改</button>
+                <button type="button" v-show="isShowDet"   class="btn btn-primary" @click="del(checkedNames)">删除</button>
+                <div class="table-responsive">
+                    <table class="table  table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th><input type="checkbox" class="checkAll" name="checks"   value="" />全选</th>
+                            <th>用户id</th>
+                            <th>用户名</th>
+                            <th>邮箱</th>
+                            <th>手机号</th>
+                            <th>创建时间</th>
+                            <th>是否锁定</th>
+                            <th>状态</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in userList">
+                            <td>
+                                <input type="checkbox" :value="item.userId"  v-model="checkedNames"  name="checks" class="chilidrens" >
+                            </td>
+                            <td v-text="item.userId"></td>
+                            <td v-text="item.userName"></td>
+                            <td v-text="item.email"></td>
+                            <td v-text="item.mobile"></td>
+                            <td v-text="item.createTime"></td>
+                            <td v-text="item.isLockDesc"></td>
+                            <td v-text="item.statusDesc"></td>
+                            </td>
+                        </tr>
+                        <tr class="no-records-found" style="text-align: center; display: none;"><td colspan="7">暂无数据</td></tr>
+                        </tbody>
+                    </table>
+                    <div class="fenyeademain3x pl15" id="pageFenye" style="margin-top:10px;"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laypage/laypage.js?{{{libVersion}}}" charset="utf-8"></script>
+<script src="{{{resourcesUrl}}}/sys/javascripts/sys/user.js?{{{fileVersion}}}"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">截止今天</span>
+                    <h5>订单</h5>
+                </div>
+                <div class="ibox-content" style="cursor: pointer; ">
+                    <h1 class="no-margins" id="shipped" onclick="location.href='view?view=order&status=200'">0</h1>
+                    <small>待发货订单</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">截止今天</span>
+                    <h5>订单</h5>
+                </div>
+                <div class="ibox-content" style="cursor: pointer; ">
+                    <h1 class="no-margins" id="payment" onclick="location.href='view?view=order&status=100'">0</h1>
+                    <small>待付款订单</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">截止今天</span>
+                    <h5>订单</h5>
+                </div>
+                <div class="ibox-content" style="cursor: pointer; ">
+                    <h1 class="no-margins" id="receipt" onclick="location.href='view?view=order&status=300'">0</h1>
+                    <small>待收货订单</small>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <span class="label label-primary pull-right">截止今天</span>
+                    <h5>资产</h5>
+                </div>
+                <div class="ibox-content" style="cursor: pointer; ">
+                    <h1 class="no-margins" id="balance" onclick="location.href='view?view=assets'">0</h1>
+                    <small>可用余额</small>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/home.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

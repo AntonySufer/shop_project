@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运费管理</title>
+    <link href="{{{resourcesUrl}}}/css/font-awesome.min.css?{{{fileVersion}}}" rel="stylesheet">
+
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg" id="freightList">
+
+  <div class="wrapper wrapper-content" style="background-color: #fff;" id="roleList" >
+      <div class="">
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                  <h5> 订单设置 > 运费管理</h5>
+              </div>
+
+          </div>
+      </div>
+       <template v-if="isTrue" v-for="item in freightList">
+           <div class="panel panel-default"  >
+               <!-- Default panel contents -->
+               <div class="panel-heading">
+                   <table class="table">
+                       <thead>
+                       <tr>
+                           <th v-text="item.id" style="width:10%;"></th>
+                           <th v-text="item.title" style="width:20%;" ></th>
+                           <th v-text="item.type_text" style="width:20%;" ></th>
+                           <th v-if="item.unit_type==1" style="width:10%;" > 按重 </th>
+                           <th v-else style="width:10%;" > 按件 </th>
+                           <th >已被<span v-text="item.item_num" style="width:20%;"></span>个商品使用</th>
+                           <th >最后编辑时间<span v-text="item.mod_date_text" style="width:10%;"></span></th>
+                            <th  v-show="!isShowBtn|| item.supplier_id==0 " style="width:10%;" ></th>
+                            <th v-show="isShowBtn && item.supplier_id!=0 " style="width:10%;" ><a @click="insertDeail(item.id)">修改</a></th>
+                       </tr>
+                       </thead>
+                   </table>
+               </div>
+               <div class="panel-body">
+                   <!-- Table -->
+                   <table class="table table-bordered" >
+                       <thead>
+                       <tr>
+                           <th>可配送至</th>
+                           <th v-if="item.unit_type==1" > 首重(kg) </th>
+                           <th v-else > 首件（件） </th>
+                           <th>运费(元)</th>
+                           <th v-if="item.unit_type==1" > 续重（kg） </th>
+                           <th v-else > 续件(件) </th>
+                           <th>续费(元)</th>
+
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr v-for="items in item.details">
+                           <td v-html="items.address"></td>
+                           <td v-text="items.first_fee"></td>
+                           <td v-text="items.first_num"></td>
+                           <td v-text="items.add_num"></td>
+                           <td v-text="items.add_fee"></td>
+
+                       </tr>
+                       </tbody>
+                   </table>
+
+               </div>
+           </div>
+       </template>
+       <template v-else>
+           <div>没有查询到运费模板</div>
+       </template>
+      <div class="fenyeademain3x pl15" id="pageFenye" style="margin-top:10px;"></div>
+  </div>
+{{{include 'layout/footer'}}}
+  <script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laypage/laypage.js?{{{libVersion}}}" charset="utf-8"></script>
+ <script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/freightlist.js?{{{fileVersion}}}" charset="utf-8"></script>
+
+</body>
+</html>

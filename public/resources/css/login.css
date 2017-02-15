@@ -1,0 +1,95 @@
+/* 公共基础的CSS */
+body {
+    /* 60px to make the container go all the way to the bottom of the topbar */
+    background-color:#F1F3F8;
+
+    font-family: "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
+    color: #424242;
+
+}
+
+input{
+    outline: none;border: 1px solid #D5D5D5;
+}
+
+input:hover{border: 1px solid #aaa;}
+input:focus {
+    border: 1px solid #1EB9FF;
+}
+
+select{ border:1px solid #D5D5D5;}
+select:hover{border: 1px solid #aaa;}
+select:focus {
+    border: 1px solid #1EB9FF; box-shadow:none;outline:none;
+}
+
+textarea{resize:none}
+
+textarea:hover{border: 1px solid #aaa;}
+textarea:focus {
+    border: 1px solid #1EB9FF; box-shadow:none;outline:none;
+}
+
+
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+    background:none; border:0px; box-shadow:inset 0 0px 0px ;
+}
+
+
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color:    #CBCBCB;
+}
+input:-moz-placeholder, textarea:-moz-placeholder {
+    color:    #CBCBCB;
+}
+input::-moz-placeholder, textarea::-moz-placeholder {
+    color:   #CBCBCB;
+}
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+    color:    #CBCBCB;
+}
+
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6,input,button,b {
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", "Arial", "Verdana", "Tahoma";
+
+}
+
+a:hover{ text-decoration:none; color:#1cb3ff;}
+
+a {
+    outline: none; cursor:pointer; color:#0087CB;
+
+}
+a:focus {
+    outline: none;text-decoration:none;
+}
+a:active{ }
+
+
+ul{list-style:none; margin-left:0px; padding-left:0px;}
+.table>tbody>tr>td{border-top:none;}
+
+.login_container{width: 604px;margin: auto;position: relative;padding-top: 150px;}
+.login_logo{width: 604px;height: 134px;background: url(../img/login/mljia_logo.png)no-repeat center;}
+.login_box{width: 400px;background: #FFFFFF;border-radius:10px;position: absolute;left: 50%;top: 50%;margin-left: -200px;margin-top: 175px;padding: 55px 30px;}
+.login_input{width: 340px;height: 100px;border: 1px solid #D3D3D3;border-radius:5px;}
+.login_user{width: 100%;height: 50px;border-bottom:1px solid #D3D3D3;}
+.icon_login{display: inline-block;width:50px ;height: 50px;float: left;}
+.icon_user{background: url(../img/login/user.png) no-repeat center;}
+.icon_lock{background: url(../img/login/lock.png) no-repeat center;}
+.input-g{height: 48px;width: 284px;font-size: 14px;border: none;}
+.input-g:hover{border: none;}
+.input-g:focus{border: none;}
+.f-c{clear: both;overflow: hidden;}
+.login_yzm{margin-top: 20px;width: 100%;}
+.login_yzminput{width: 165px;height: 48px;border-radius:5px ;padding-left: 20px;float: left;}
+.login_yzimg{margin-left: 10px;display: inline-block;width: 160px;height: 48px;border-radius:5px ;background: #BBBBBB;}
+.login_yzimg img{border-radius:5px ;width: 100%;height: 100%;}
+.longinbtn{margin-top: 30px;width: 340px;height: 50px;border-radius:5px ;background: #5cc4ef;line-height: 50px;text-align: center;font-size: 24px;}
+.longinbtn:hover{background: #4ea6cc;}
+.longinbtn a{color:#FFFFFF ;width: 100%;height: 100%;display: block;}
+.longinbtn a:hover{color: #FFFFFF;text-decoration: none;}
+.footer{color: #9addd0;font-size: 14px;text-align: center;margin-bottom: 50px;margin-top: 580px;}

@@ -1,0 +1,9 @@
+.settings/
+.idea/
+target/
+*.iml
+logs/
+log4js.json
+redis.json
+server.json
+email.json

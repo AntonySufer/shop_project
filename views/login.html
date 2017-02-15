@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>供应商运营管理系统</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="{{{resourcesUrl}}}/sys/libs/bootstrap/css/bootstrap.min.css?{{{fileVersion}}}">
+    <link rel="stylesheet" href="{{{resourcesUrl}}}/css/login.css?{{{fileVersion}}}">
+    <script>
+        var GLOBAL={
+            confRoot:"{{{confRoot}}}",
+            mallRoot:"{{{mallRoot}}}",
+        };
+    </script>
+</head>
+
+<body style="background: #1ab394;">
+<div class="login_container"  id="rrapp" v-cloak>
+    <div class="login_logo">
+    </div>
+    <div class="login_box">
+        <div class="login_input">
+            <div class="login_user f-c">
+                <i class="icon_user icon_login"></i>
+                <input type="text" class="input-g" v-model="username" placeholder="账号" id="username">
+            </div>
+            <div class="login_password">
+                <i class="icon_lock icon_login"></i>
+                <input type="password" class="input-g" v-model="password" placeholder="密码" id="password">
+            </div>
+        </div>
+        <div class="login_yzm f-c" >
+			<span>
+                 <input type="text" class="login_yzminput" v-model="captcha" @keyup.enter="login" id="captcha" placeholder="验证码">
+			</span>
+            <span class="login_yzimg"> <img alt="如果看不清楚，请单击图片刷新！" class="pointer" :src="imgCode.image" @click="refreshCode"></span>
+        </div>
+        <div class="longinbtn" @click="login">
+            <a>登录</a>
+        </div>
+    </div>
+
+</div>
+<div class="footer">©2017 美丽加版权所有</div>
+
+
+<script src="{{{resourcesUrl}}}/sys/libs/jquery.min.js?{{{libVersion}}}"></script>
+<script src="{{{resourcesUrl}}}/sys/libs/bootstrap.min.js?{{{libVersion}}}"></script>
+<script src="{{{resourcesUrl}}}/sys/libs/vue.min.js?{{{libVersion}}}"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/layer.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/jquery.base64.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/requestUrl.js?{{{fileVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/login.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

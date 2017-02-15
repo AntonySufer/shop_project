@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请提现</title>
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content" id="app">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5> <a onclick="location.href='view?view=assets'">资产</a> > 申请提现</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" style="border: none;">
+                                <form class="form-horizontal m-t" id="commentForm" novalidate="novalidate">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">提现金额：</label>
+                                        <div class="col-sm-8">
+                                            <input id="price" name="price" placeholder="提现金额" @keyup="model.price=clearNoNum(model.price)"  type="text" v-model="model.price" class="form-control" required="" aria-required="true">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">备注信息：</label>
+                                        <div class="col-sm-8">
+                                            <textarea id="desc" name="desc" maxlength="100" placeholder="备注信息" v-model="model.desc" class="form-control" required="" aria-required="true"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="button" @click="add">提交</button>
+                                            <button class="btn btn-white" onclick="history.back(-1)" style="margin-left: 20px;" type="button" @click="add">取消</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/applyWithdraw.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

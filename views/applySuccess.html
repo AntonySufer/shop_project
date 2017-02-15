@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>申请提现</title>
+    {{{include 'layout/header'}}}
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content" id="app">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5> <a onclick="location.href='view?view=assets'">资产</a> > <a onclick="location.href='view?view=applyWithdraw'">申请提现</a> > 提现完成</h5>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content" style="border: none;">
+                                <form class="form-horizontal m-t" id="commentForm" novalidate="novalidate">
+                                    <div class="form-group">
+                                       <p>提现申请已提交，预计5日内（节假日顺延）到账到您的账户。</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <p>当前账户余额<span id="balance"></span>元</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-4 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="button" onclick="location.href='view?view=presentRecord'">提现记录</button>
+                                            <button class="btn btn-white" onclick="location.href='view?view=assets'" style="margin-left: 20px;" type="button" @click="add">返回首页</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/applySuccess.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

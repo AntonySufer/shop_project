@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单详情</title>
+    {{{include 'layout/header'}}}
+    <link href="{{{resourcesUrl}}}/css/plugins/steps/jquery.steps.css?{{{fileVersion}}}" rel="stylesheet">
+    <style type="text/css">
+        .textbox{width: 260px; display: inline-block;margin-bottom: 20px;}
+        .text-left{margin: 0 0 20px;}
+    </style>
+</head>
+<body class="gray-bg" id="app">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="wizard-big wizard clearfix">
+            <div class="steps clearfix">
+                <ul role="tablist">
+                    <li role="tab" :class="item.process.create?'first current':'disabled'" aria-disabled="false" aria-selected="true">
+                        <a id="form-t-0" aria-controls="form-p-0">
+                            <template v-if="item.process.create && item.process.create.time">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                买家下单
+                                <span style="padding-left: 40px;" v-text="(item.process.create && item.process.create.time)?item.process.create.time:''">-</span>
+                            </template>
+                            <template v-else>
+                                买家下单
+                            </template>
+                        </a>
+                    </li>
+                    <li role="tab" :class="item.process.pay?'first current':'disabled'" aria-disabled="true">
+                        <a id="form-t-1"  aria-controls="form-p-1">
+                            <template v-if="item.process.pay  && item.process.pay.time">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                买家付款
+                                <span style="padding-left: 40px;" v-text="(item.process.pay && item.process.pay.time)?item.process.pay.time:''">-</span>
+                            </template>
+                            <template v-else>
+                                买家付款
+                            </template>
+                        </a>
+                    </li>
+                    <li role="tab" :class="item.process.output?'first current':'disabled'" aria-disabled="true">
+                        <a id="form-t-2"  aria-controls="form-p-2">
+                            <template v-if="item.process.output && item.process.output.time">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                出库
+                                <span style="padding-left: 40px;" v-text="(item.process.output && item.process.output.time)?item.process.output.time:''">-</span>
+                            </template>
+                            <template v-else>
+                                出库
+                            </template>
+                        </a>
+                    </li>
+                    <li role="tab" :class="item.process.shipping?'first current':'disabled'" aria-disabled="true">
+                        <a id="form-t-3" aria-controls="form-p-3">
+                            <template v-if="item.process.shipping && item.process.shipping.time">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                发货
+                                <span style="padding-left: 40px;" v-text="(item.process.shipping && item.process.shipping.time)?item.process.shipping.time:''">-</span>
+                            </template>
+                            <template v-else>
+                                发货
+                            </template>
+                        </a>
+                    </li>
+                    <li role="tab" :class="item.process.confirm?'first current':'disabled'" aria-disabled="true">
+                        <a id="form-t-4" aria-controls="form-p-4">
+                            <template v-if="item.process.confirm && item.process.confirm.time">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                买家确认收货
+                                <span style="padding-left: 40px;" v-text="(item.process.confirm && item.process.confirm.time)?item.process.confirm.time:''">-</span>
+                            </template>
+                            <template v-else>
+                                买家确认收货
+                            </template>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>订单信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <span class="text-left textbox"> 订单号： <span v-text="item.main.order_number"></span></span>
+                        <span>订单状态：</span>
+                        <span  v-text="item.main.status_text"></span>
+                        <button v-show="item.main.status==200 && isShowOut" class="btn btn-primary" style="margin-left: 50px; display: none;" @click="theLibrary" type="button">出库</button>
+                        <button v-show="item.main.status==210 && isShowDeliver" class="btn btn-primary" style="margin-left: 50px;  display: none;" @click="delivery" type="button">发货</button>
+                    </div>
+                    <div>
+                        <span class="text-left textbox"> 支付单号： <span v-text="item.main.pay_oid"></span> </span>
+                        <span >下单时间：</span>
+                        <span v-text="item.main.in_date?new Date(item.main.in_date*1000).format('yyyy-MM-dd hh:mm:ss'):''">-</span>
+                    </div>
+                    <div>
+                        <span class="text-left textbox">支付方式： <span v-text="item.main.payment_method"></span> </span>
+                        <span>支付时间：</span>
+                        <span v-text="(item.process.pay && item.process.pay.time)?item.process.pay.time:''">-</span>
+                    </div>
+                    <p class="text-left">订单来源： <span v-text="item.main.platform_text"></span>  </p>
+                    <p class="text-left">买家留言： <span v-text="item.main.remark"></span>  </p>
+                    <p class="text-left">卖家留言： <span v-text="item.main.seller_remark"></span>  </p>
+                </div>
+                <div class="ibox-title">
+                    <h5>买家信息</h5>
+                </div>
+                <div class="ibox-content">
+                    <p class="text-left">收货信息： <span v-text="item.main.shipping_address+'  '+ item.main.shipping_name+' '+item.main.shipping_phone+' '+item.main.shipping_postcode"></span>  </p>
+                    <p class="text-left">买家昵称： <span v-text="item.customer.firstname"></span>  </p>
+                    <p class="text-left">买家账号： <span v-text="item.customer.telephone"></span>  </p>
+                </div>
+                <div class="ibox-title">
+                    <h5>商品信息</h5>
+                    <div class="ibox-tools">
+                        <button class="btn btn-primary" @click="print" type="button" v-show="isShowPrint">打印发货单</button>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered">
+                            <thead>
+                            <tr>
+                                <th>商品名称</th>
+                                <th>规格</th>
+                                <th>单价(元)</th>
+                                <th>实收单价（元）</th>
+                                <th>数量</th>
+                                <th>应收(元)</th>
+                                <th>实收（元）</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="i in item.item">
+                                <td >
+                                    <img :src="i.image" style="width: 70px;height: 70px;">
+                                    <span v-text="i.title"></span>
+                                </td>
+                                <td v-text="i.sku_name"> </td>
+                                <td v-text="i.cost_price"></td>
+                                <td v-text="i.price"></td>
+                                <td v-text="i.quantity"></td>
+                                <td v-text="i.old_price>0?(i.old_price*i.quantity):(i.price*i.quantity)"></td>
+                                <td>
+                                    <input type="text" name="receipts" @keyup="i.receipts=clearNoNum(i.receipts,i.old_price,i.quantity,i.price)" :disabled="!isOrderBtn" v-model="i.receipts"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>商品总额（元）</td>
+                                <td v-text="item.order_total.sub_total.old_value>0?item.order_total.sub_total.old_value:item.order_total.sub_total.value"></td>
+                                <td v-text="item.order_total.sub_total.value"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td>运费</td>
+                                <td v-text="item.order_total.shipping.old_value>0?item.order_total.shipping.old_value:item.order_total.shipping.value"></td>
+                                <td v-text="item.order_total.shipping.value"></td>
+                            </tr>
+                            <tr v-show="item.order_total.coupon && item.order_total.coupon.value">
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td>优惠券折扣</td>
+                                <td v-text="item.order_total.coupon.old_value!=0?item.order_total.coupon.old_value:item.order_total.coupon.value"></td>
+                                <td v-text="item.order_total.coupon.value"></td>
+                            </tr>
+                            <tr v-show="item.order_total.pay_discount && item.order_total.pay_discount.value">
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td>美丽宝支付优惠</td>
+                                <td v-text="item.order_total.pay_discount.old_value!=0?item.order_total.pay_discount.old_value:item.order_total.pay_discount.value"></td>
+                                <td v-text="item.order_total.pay_discount.value"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td>订单总额（元）</td>
+                                <td v-text="item.order_total.total.old_value>0?item.order_total.total.old_value:item.order_total.total.value"></td>
+                                <td v-text="item.order_total.total.value"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td> </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button class="btn btn-primary" type="button" @click="saveOrderInfo" v-show="isOrderBtn">保存</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="ibox-title">
+                    <h5>操作记录</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table  table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>操作时间</th>
+                                    <th>操作人</th>
+                                    <th>操作信息</th>
+                                    <th>操作后订单状态</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in historyItems">
+                                    <td v-text="item.date_added"></td>
+                                    <td v-text="item.actor_user"> </td>
+                                    <td v-text="item.comment"></td>
+                                    <td v-text="item.status_name"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laypage/laypage.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/orderDetail.js?{{{fileVersion}}}" charset="utf-8"></script>
+</body>
+</html>

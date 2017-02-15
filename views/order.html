@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>订单列表</title>
+    {{{include 'layout/header'}}}
+    <link href="{{{resourcesUrl}}}/css/plugins/iCheck/custom.css?{{{fileVersion}}}" rel="stylesheet">
+    <link href="{{{resourcesUrl}}}/css/font-awesome.min.css?{{{fileVersion}}}" rel="stylesheet">
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content" id="app">
+    <div class="col-sm-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>订单列表</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-inline" role="form">
+                    <div>
+                        <div class="form-group" style="margin-left:58px;">
+                            <label for="productName">商品名称：</label>
+                            <input type="text" placeholder="商品名称" v-model="param.productName" name="productName" id="productName" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-left: 83px;">
+                            <label for="startDate">下单时间：</label>
+                            <input type="text" placeholder="下单时间" id="startDate" v-model="param.startDate" name="startDate" class="form-control">
+                            至
+                            <input type="text" placeholder="下单时间" id="endDate" v-model="param.endDate" name="endDate" class="form-control">
+                            <span style="margin-left: 15px; cursor: pointer;" @click="setDate()">最近7天</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <div class="form-group">
+                            <select class="input-sm form-control input-s-sm inline" v-model="shippingType">
+                                <option value="shippingName">收货人姓名</option>
+                                <option value="shippingTelephone">收货人手机</option>
+                                <option value="telephone">买家帐号</option>
+                                <option value="firstname">买家昵称</option>
+                            </select>
+                            <input type="text" placeholder="请输入" v-model="paraText" id="paraText" class="form-control">
+                        </div>
+                        <div class="form-group" style="margin-left:83px;">
+                            <label for="status">订单状态：</label>
+                            <select class="input-sm form-control input-s-sm inline" id="status" v-model="param.status">
+                                <option value="0">全部</option>
+                                <option value="100">待付款</option>
+                                <option value="200">待发货</option>
+                                <option value="210">正在出库</option>
+                                <option value="300">待收货</option>
+                                <option value="400">已完成</option>
+                                <option value="700">已取消</option>
+                                <!--<option value="500">申请退货</option>-->
+                                <!--<option value="510">退货处理中</option>-->
+                                <!--<option value="520">退货完成</option>-->
+                               <option value="600">订单处理中</option>
+                            </select>
+                            <label for="payType" style="margin-left: 50px;">支付方式：</label>
+                            <select class="input-sm form-control input-s-sm inline" id="payType" v-model="param.payType">
+                                <option value="0">全部</option>
+                                <option value="2">微信支付</option>
+                                <option value="3">美丽宝</option>
+                                <option value="1">支付宝</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;margin-left: 68px;">
+                        <label for="orderNumber">订单号：</label>
+                        <input id="orderNumber" name="orderNumber" v-model="param.orderNumber"  class="form-control"  placeholder="订单号" type="text">
+                    </div>
+                    <div class="row" style="margin: 20px 0;">
+                        <button class="btn btn-w-m btn-primary" @click="search" style="margin-left: 183px; padding: 6px 40px;" type="button" v-show="isShowSearch">搜索</button>
+                        <button class="btn btn-w-m btn-primary" @click="export" style=" margin-left: 83px;padding: 6px 40px;" type="button" v-show="isShowExport">导出</button>
+                    </div>
+                </form>
+                <div class="table-responsive">
+                    <table class="table  table-bordered">
+                        <thead>
+                        <tr>
+                            <th @click="allChange">
+                                <input type="checkbox" value="0"  id="checkboxOneInput" v-bind:checked="selectIng.length==allSelect.length" style="width: 17px; height: 17px;"   name="checkboxOneInput">
+                            </th>
+                            <th>订单号</th>
+                            <th>收货人</th>
+                            <th>下单时间</th>
+                            <th>订单状态</th>
+                            <th>实收总额(元)</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="item in items">
+                            <td>
+                                <input type="checkbox" :value="parseInt(item.main.order_number)"  v-model="selectIng"  name="checkboxOneInput" style="width: 17px; height: 17px;"  name="checkboxOneInput">
+                            </td>
+                            <td v-text="item.main.order_number"></td>
+                            <td >
+                                <span v-text="item.main.shipping_name"></span>
+                                <i class="fa fa-file-text-o" v-show="item.main.remark" style="cursor: pointer" :title="item.main.remark"></i>
+                            </td>
+                            <td v-text="new Date(item.main.in_date*1000).format('yyyy-MM-dd hh:mm:ss')"></td>
+                            <td v-text="item.main.order_status_name"></td>
+                            <td v-text="item.main.order_total"></td>
+                            <td><a @click="goDetailPage(item.main.order_number)">详情</a>
+                            </td>
+                        </tr>
+                        <tr class="no-records-found" style="display: none; text-align: center;" v-show="!items || items.length<1"><td colspan="7">暂无数据</td></tr>
+                        </tbody>
+                    </table>
+                    <div id="pagination"></div>
+                </div>
+                <div class="row" style="margin: 20px 0;">
+                    <div style="float:left;">
+                        <button class="btn btn-primary" style="padding: 6px 30px;" type="button" @click="theLibrary"  v-show="isShowOut">出库</button>
+                        <button class="btn btn-primary"  style=" margin-left: 15px;padding: 6px 30px;" type="button" @click="delivery"  v-show="isShowDeliver">发货</button>
+                        <button class="btn btn-primary"  style=" margin-left: 15px;padding: 6px 30px;" type="button"  @click="print"  v-show="isShowPrint">打印发货单</button>
+                    </div>
+                    <div style="float:left;margin-top:10px;margin-left:25px;" >
+                        <span title="订单需先通过出库操作,由“待发货”变为“正在出库”状态，然后通过发货操作，再变为“待收货”状态" style="cursor: pointer;border-radius: 8px; border: 1px solid;width: 16px;height: 16px;font-size: 10px;float: right;margin-right: 5px;">
+                                <span style="margin: 0px 6px 0 4px;display: block">?</span>
+                        </span>
+                        操作说明
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{{include 'layout/footer'}}}
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/iCheck/icheck.min.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laypage/laypage.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/lib/plugins/layer/laydate/laydate.js?{{{libVersion}}}" charset="utf-8"></script>
+<script type="text/javascript" src="{{{resourcesUrl}}}/javascripts/page/order.js?{{{fileVersion}}}" charset="utf-8"></script>
+<script>
+    $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
+</script>
+</body>
+</html>

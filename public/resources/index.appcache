@@ -1,0 +1,13 @@
+CACHE MANIFEST
+#HTML5应用离线缓存
+#v2.0.0.0
+#You can also use the CACHE: section header to explicitly declare the following three files.
+
+
+NETWORK:
+*
+
+FALLBACK:
+
+
+
